@@ -93,7 +93,7 @@ import { reactive, ref } from "vue";
 import { Lock, Message } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import router from "@/router";
-
+import {post} from "@/net";
 const isEmailValid = ref(false)
 const coldTime = ref(0)
 const form = reactive({

@@ -18,6 +18,16 @@ const router = createRouter({
                     component: () => import('@/components/welcome/ForgetPage.vue')
                 }
             ]
+        },
+        {
+            path: '/manage',
+            component: () => import('@/views/ManageView.vue'),
+            children: [
+                {
+                    path: '/userList',
+                    component: () => import('@/components/manage/userListPage.vue')
+                }
+            ]
         }
     ]
 })

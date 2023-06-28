@@ -68,10 +68,11 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import {Lock, Message, User} from "@element-plus/icons-vue";
 import router from "@/router";
-import { ElMessage } from "element-plus";
-import { Lock, Message, User } from "@element-plus/icons-vue";
+import {reactive, ref} from "vue";
+import {ElMessage} from "element-plus";
+import {post} from "@/net";
 const form = reactive({
     username: '',
     password: '',
@@ -135,6 +136,23 @@ const validateEmail = () => {
         ElMessage.warning(message)
         coldTime.value = 0
     })
+}
+const register = () => {
+  formRef.value.validate((isValid) => {
+    if (isValid) {
+      post('api/auth/register', {
+        username: form.username,
+        password: form.password,
+        email: form.email,
+        code: form.code
+      }, (message) => {
+        ElMessage.success(message)
+        router.push("/")
+      })
+    } else {
+      ElMessage.warning('请完整填写注册表单内容')
+    }
+  })
 }
 </script>
 
